@@ -20,6 +20,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     image = frame.array
     cv2.imshow("Image", image)
     # cv2.waitKey(0)
+    rawCapture.truncate(0)
     k = 0xFF & cv2.waitKey(10)
     if k == 27:
         break
