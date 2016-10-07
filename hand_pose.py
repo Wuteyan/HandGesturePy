@@ -64,7 +64,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 		move='         '+move_text[res]
 		
 	fps=int(1/(time.time()-t))
-	cv2.putText(img,"FPS: "+str(fps)+move,(50,50), font,1,(255,255,255),2,cv2.LINE_AA)
+	# cv2.putText(img,"FPS: "+str(fps)+move,(50,50),1,(255,255,255),2,cv2.LINE_AA)
 	cv2.imshow('Frame',img)
 	k = 0xFF & cv2.waitKey(10)
 	if k == 27:
