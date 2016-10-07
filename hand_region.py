@@ -9,22 +9,37 @@ import hand_util as hu
 
 import time
 
+from picamera.array import PiRGBArray
+from picamera import PiCamera
 
 #create and train SVM model each time coz bug in opencv 3.1.0 svm.load() https://github.com/Itseez/opencv/issues/4969
 model=st.trainSVM(9,20,'TrainData2')
 
 kernel = np.ones((5,5),np.uint8)
 #Camera and font initialization
+
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size=(640, 480))
+# rawCapture = PiRGBArray(camera)
+ 
+# allow the camera to warmup
+time.sleep(0.1)
+
 cam=int(raw_input("Enter Camera Index : "))
 cap=cv2.VideoCapture(cam)
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-
+for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 #The main event loop
-while(cap.isOpened()):
+	image = frame.array
 	t=time.time()
-	_,img=cap.read()
-	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+# while(cap.isOpened()):
+	# t=time.time()
+	# _,img=cap.read()
+	# gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),130,255,cv2.THRESH_BINARY)
 	th1= cv2.erode(th1,kernel,iterations =2)
 	cv2.imshow('thresh',th1)
