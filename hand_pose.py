@@ -16,7 +16,8 @@ import numpy as np
 #Importing our dependencies
 import util as ut
 import svm_train as st 
-
+from picamera.array import PiRGBArray
+from picamera import PiCamera
 
 
 import time
@@ -33,11 +34,26 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 
 
 #The main event loop
-while(cap.isOpened()):
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size=(640, 480))
+# rawCapture = PiRGBArray(camera)
+ 
+# allow the camera to warmup
+time.sleep(0.1)
+
+# cam=int(raw_input("Enter Camera Index : "))
+# cap=cv2.VideoCapture(cam)
+# font = cv2.FONT_HERSHEY_SIMPLEX
+
+for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 	move=''
 	t=time.time()
-	_,img=cap.read()
-	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	image = frame.array
+	# _,img=cap.read()
+	gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),150,255,cv2.THRESH_TOZERO)
 	cv2.imshow('thresh',th1)
 	_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)

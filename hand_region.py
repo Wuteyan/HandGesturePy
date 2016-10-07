@@ -28,9 +28,9 @@ rawCapture = PiRGBArray(camera, size=(640, 480))
 # allow the camera to warmup
 time.sleep(0.1)
 
-cam=int(raw_input("Enter Camera Index : "))
-cap=cv2.VideoCapture(cam)
-font = cv2.FONT_HERSHEY_SIMPLEX
+# cam=int(raw_input("Enter Camera Index : "))
+# cap=cv2.VideoCapture(cam)
+# font = cv2.FONT_HERSHEY_SIMPLEX
 
 for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 #The main event loop
@@ -39,7 +39,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 # while(cap.isOpened()):
 	# t=time.time()
 	# _,img=cap.read()
-	# gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+	gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),130,255,cv2.THRESH_BINARY)
 	th1= cv2.erode(th1,kernel,iterations =2)
 	cv2.imshow('thresh',th1)
