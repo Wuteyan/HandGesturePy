@@ -18,6 +18,7 @@ import util as ut
 import svm_train as st 
 from picamera.array import PiRGBArray
 from picamera import PiCamera
+import RPi.GPIO as GPIO
 
 
 import time
@@ -31,7 +32,9 @@ move_text={'1':'GRAB','2':'Bless','3':'Rock','4':'Stop','5':'ThumbsUp','6':'Vict
 # cam=int(raw_input("Enter Camera Index : "))
 # cap=cv2.VideoCapture(cam)
 # font = cv2.FONT_HERSHEY_SIMPLEX
-
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(18, GPIO.OUT)
+GPIO.output(18, GPIO.HIGH)
 
 #The main event loop
 # initialize the camera and grab a reference to the raw camera capture
@@ -39,6 +42,7 @@ camera = PiCamera()
 camera.resolution = (640, 480)
 camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(640,480))
+
 # rawCapture = PiRGBArray(camera)
  
 # allow the camera to warmup
