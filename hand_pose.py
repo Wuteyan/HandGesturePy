@@ -51,9 +51,9 @@ time.sleep(0.1)
 for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 	move=''
 	t=time.time()
-	image = frame.array
+	img = frame.array
 	# _,img=cap.read()
-	gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),150,255,cv2.THRESH_TOZERO)
 	cv2.imshow('thresh',th1)
 	_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)

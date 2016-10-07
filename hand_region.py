@@ -34,12 +34,12 @@ time.sleep(0.1)
 
 for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 #The main event loop
-	image = frame.array
+	img = frame.array
 	t=time.time()
 # while(cap.isOpened()):
 	# t=time.time()
 	# _,img=cap.read()
-	gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),130,255,cv2.THRESH_BINARY)
 	th1= cv2.erode(th1,kernel,iterations =2)
 	cv2.imshow('thresh',th1)
