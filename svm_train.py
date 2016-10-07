@@ -109,7 +109,7 @@ def load_img_labels(num,num2,folder):
     imgs=[]
     for i in range(1,num+1):
        for j in range(1,num2+1):
-           print 'loading '+folder+'/'+str(i)+'_'+str(j)+'.jpg'
+           # print "loading '+folder+'/'+str(i)+'_'+str(j)+'.jpg'
            imgs.append(cv2.imread(folder+'/'+str(i)+'_'+str(j)+'.jpg',0))
     labels = np.repeat(np.arange(num), num2)
     return imgs,labels
