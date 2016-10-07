@@ -28,9 +28,9 @@ model=st.trainSVM(9,20,'TrainData2')
 move_text={'1':'GRAB','2':'Bless','3':'Rock','4':'Stop','5':'ThumbsUp','6':'Victory','7':'Stop2','8':'Left','9':'Right'}
 
 #Camera and font initialization
-cam=int(raw_input("Enter Camera Index : "))
-cap=cv2.VideoCapture(cam)
-font = cv2.FONT_HERSHEY_SIMPLEX
+# cam=int(raw_input("Enter Camera Index : "))
+# cap=cv2.VideoCapture(cam)
+# font = cv2.FONT_HERSHEY_SIMPLEX
 
 
 #The main event loop
