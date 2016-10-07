@@ -11,9 +11,12 @@ rawCapture = PiRGBArray(camera)
 time.sleep(0.1)
  
 # grab an image from the camera
-camera.capture(rawCapture, format="bgr")
-image = rawCapture.array
+# camera.capture(rawCapture, format="bgr")
+# image = rawCapture.array
+
  
 # display the image on screen and wait for a keypress
-cv2.imshow("Image", image)
-cv2.waitKey(0)
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    image = frame.array
+    cv2.imshow("Image", image)
+    cv2.waitKey(0)
