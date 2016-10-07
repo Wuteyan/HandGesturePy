@@ -36,9 +36,9 @@ move_text={'1':'GRAB','2':'Bless','3':'Rock','4':'Stop','5':'ThumbsUp','6':'Vict
 #The main event loop
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-# camera.resolution = (640, 480)
+camera.resolution = (640, 480)
 camera.framerate = 32
-rawCapture = PiRGBArray(camera)
+rawCapture = PiRGBArray(camera, size=(640,480))
 # rawCapture = PiRGBArray(camera)
  
 # allow the camera to warmup
@@ -66,6 +66,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 	fps=int(1/(time.time()-t))
 	# cv2.putText(img,"FPS: "+str(fps)+move,(50,50),1,(255,255,255),2,cv2.LINE_AA)
 	cv2.imshow('Frame',img)
+	rawCapture.truncate(0)
 	k = 0xFF & cv2.waitKey(10)
 	if k == 27:
 		break
