@@ -165,7 +165,7 @@ while(cap.isOpened()):
 		#get mouse location
 		mx=int((int(w_screen)/640)*cx)
 		my=int((int(h_screen)/480)*cy)
-		print mx,my
+		# # print mx,my
 
 
 		#always keep maximum of 20 points in the trail

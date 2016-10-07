@@ -7,7 +7,7 @@ n_class=input("Number of Class : ")
 n_item_per_calss=input("Number of Item per Class : ")
 folder_name=raw_input("Folder Name : ")
 
-print 'Loading Dataset . . .'
+# print 'Loading Dataset . . .'
 imgs,labels=st.load_img_labels(n_class,n_item_per_calss,folder_name)
 samples=st.preprocess_hog(imgs)
 
@@ -17,16 +17,16 @@ scoring =['accuracy', 'average_precision', 'f1_macro', 'f1_micro', 'f1_samples',
 		 'precision_macro', 'precision_micro', 'precision_samples', 'precision_weighted', 
 		 'recall_macro', 'recall_micro', 'recall_samples', 'recall_weighted', 'roc_auc']
 
-print 'Using Scoring Strategies ',scoring
+# print 'Using Scoring Strategies ',scoring
 
 clf=SVC()
 
 for scr in scoring:
-	print '----------------------- '+scr+' -----------------------'
+	# print '----------------------- '+scr+' -----------------------'
 	try:
 		res=cross_validation.cross_val_score(clf, samples, labels, scoring=scr,cv=n_cv)
-		print 'Mean    :   ',res.mean()
-		print 'Max     :   ',res.max()
-		print 'Min     :   ',res.min()
+		# print 'Mean    :   ',res.mean()
+		# print 'Max     :   ',res.max()
+		# print 'Min     :   ',res.min()
 	except ValueError:
-		print 'Multiclass not Supported '
+		# print 'Multiclass not Supported '

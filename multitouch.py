@@ -147,7 +147,7 @@ while(cap.isOpened()):
 		#get mouse location
 		mx=int((int(w_screen)/640)*cx)
 		my=int((int(h_screen)/480)*cy)
-		print mx,my
+		# print mx,my
 		#mouse events by hand pose 
 		if int(resp)==1 and mouse_enable:
 			if pressed:

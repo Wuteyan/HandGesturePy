@@ -109,7 +109,7 @@ def load_img_labels(num,num2,folder):
     imgs=[]
     for i in range(1,num+1):
        for j in range(1,num2+1):
-           # print "loading '+folder+'/'+str(i)+'_'+str(j)+'.jpg'
+           # # print "loading '+folder+'/'+str(i)+'_'+str(j)+'.jpg'
            imgs.append(cv2.imread(folder+'/'+str(i)+'_'+str(j)+'.jpg',0))
     labels = np.repeat(np.arange(num), num2)
     return imgs,labels
@@ -117,9 +117,9 @@ def load_img_labels(num,num2,folder):
 def trainSVM(num,num2,folder):
 	imgs,labels=load_img_labels(num,num2,folder)
 	samples=preprocess_hog(imgs)
-	print('training SVM...')
-	print len(labels)
-	print len(samples)
+	# print('training SVM...')
+	# # print len(labels)
+	# # print len(samples)
 	model = SVM(C=2.67, gamma=5.383)
 	model.train(samples, labels)
 	return model
