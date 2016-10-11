@@ -23,7 +23,7 @@ name=""
 
 for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 	move=''
-	t=time.time()
+	# t=time.time()
 	img = frame.array
 	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	ret,th1 = cv2.threshold(gray.copy(),100,255,cv2.THRESH_BINARY)
