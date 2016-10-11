@@ -37,11 +37,15 @@ import hand_util as hu
 #other dependencies
 from pymouse import PyMouse
 import moosegesture as mges
+import RPi.GPIO as GPIO
 
 
 #PyMouse the library to control mouse movements from python
 m1 = PyMouse()
 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(18, GPIO.OUT)
+GPIO.output(18, GPIO.HIGH)
 
 #capturing device 
 cam=int(raw_input("Enter Camera Index : "))
