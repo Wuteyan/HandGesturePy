@@ -37,6 +37,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 		cv2.imshow('Trainer',imgT)
 	cv2.imshow('Frame',img)
 	cv2.imshow('Thresh',th1)
+	rawCapture.truncate(0)
 	k = 0xFF & cv2.waitKey(10)
 	if k == 27:
 		break
