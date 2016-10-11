@@ -29,7 +29,7 @@ def main(argv):
 		# t=time.time()
 		img = frame.array
 		gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-		ret,th1 = cv2.threshold(gray.copy(),100,255,cv2.THRESH_BINARY)
+		ret,th1 = cv2.threshold(gray.copy(),80,255,cv2.THRESH_BINARY)
 		_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
 		cnt=ut.getMaxContour(contours,4000)
 		if cnt!=None:
@@ -52,6 +52,7 @@ def main(argv):
 				j+=1
 			else:
 				while(0xFF & cv2.waitKey(0)!=ord('n')):
+					start = False
 					j=1
 				j=1
 				i+=1
