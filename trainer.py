@@ -16,7 +16,7 @@ camera.resolution = (640, 480)
 camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(640,480))
 
-train_folder=raw_input("Enter Train Folder name : ")
+train_folder=input("Enter Train Folder name : ")
 i=1
 j=1
 name=""
