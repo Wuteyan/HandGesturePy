@@ -64,8 +64,8 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 	cnt=ut.getMaxContour(contours,4000)
 	if cnt!=None:
 		gesture,res=ut.getGestureImg(cnt,img,th1,model)
-		print(gesture)
-		# cv2.imshow('PredictedGesture',cv2.imread('TrainData2/'+res+'_1.jpg'))
+		print(res)
+		cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
 		# move='         '+move_text[res]
 		
 	fps=int(1/(time.time()-t))
