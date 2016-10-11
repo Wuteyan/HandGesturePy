@@ -1,18 +1,32 @@
 import cv2
 import numpy as np
 import util as ut
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import RPi.GPIO as GPIO
 
-cam=int(raw_input("Enter Camera Index : "))
-cap=cv2.VideoCapture(cam)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(12, GPIO.OUT)
+GPIO.output(12, GPIO.HIGH)
+
+#The main event loop
+# initialize the camera and grab a reference to the raw camera capture
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size=(640,480))
+
 train_folder=raw_input("Enter Train Folder name : ")
 i=1
 j=1
 name=""
 
-while(cap.isOpened()):
-	_,img=cap.read()
+for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
+	move=''
+	t=time.time()
+	img = frame.array
 	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-	ret,th1 = cv2.threshold(gray.copy(),130,255,cv2.THRESH_BINARY)
+	ret,th1 = cv2.threshold(gray.copy(),100,255,cv2.THRESH_BINARY)
 	_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
 	cnt=ut.getMaxContour(contours,4000)
 	if cnt!=None:
