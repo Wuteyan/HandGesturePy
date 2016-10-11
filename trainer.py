@@ -45,6 +45,7 @@ def main(argv):
 		if k == 27:
 			break
 		if k == ord('s') or start:
+			print('write')
 			name=str(i)+"_"+str(j)+".jpg"
 			cv2.imwrite(train_folder+'/'+name,imgT)
 			start = True
@@ -52,6 +53,7 @@ def main(argv):
 				j+=1
 			else:
 				while(0xFF & cv2.waitKey(0)!=ord('n')):
+					print('next')
 					start = False
 					j=1
 				j=1
