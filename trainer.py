@@ -4,6 +4,7 @@ import util as ut
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 import RPi.GPIO as GPIO
+import sys
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(12, GPIO.OUT)
@@ -19,7 +20,7 @@ rawCapture = PiRGBArray(camera, size=(640,480))
 def main(argv):
 	train_folder=argv[1]
 	i=int(argv[2])
-	j=int(argv[3])
+	j=1
 	name=""
 	start =False
 
