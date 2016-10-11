@@ -78,3 +78,5 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 
 cap.release()        
 cv2.destroyAllWindows()
+
+

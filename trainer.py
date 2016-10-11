@@ -16,42 +16,48 @@ camera.resolution = (640, 480)
 camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(640,480))
 
-train_folder=input("Enter Train Folder name : ")
-i=1
-j=1
-name=""
+def main(argv):
+	train_folder=argv[1]
+	i=int(argv[2])
+	j=int(argv[3])
+	name=""
+	start =False
 
-for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
-	move=''
-	# t=time.time()
-	img = frame.array
-	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-	ret,th1 = cv2.threshold(gray.copy(),100,255,cv2.THRESH_BINARY)
-	_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
-	cnt=ut.getMaxContour(contours,4000)
-	if cnt!=None:
-		x,y,w,h = cv2.boundingRect(cnt)
-		imgT=img[y:y+h,x:x+w]
-		imgT=cv2.bitwise_and(imgT,imgT,mask=th1[y:y+h,x:x+w])
-		imgT=cv2.resize(imgT,(200,200))
-		cv2.imshow('Trainer',imgT)
-	cv2.imshow('Frame',img)
-	cv2.imshow('Thresh',th1)
-	rawCapture.truncate(0)
-	k = 0xFF & cv2.waitKey(10)
-	if k == 27:
-		break
-	if k == ord('s'):
-		name=str(i)+"_"+str(j)+".jpg"
-		cv2.imwrite(train_folder+'/'+name,imgT)
-		if(j<40):
-			j+=1
-		else:
-			while(0xFF & cv2.waitKey(0)!=ord('n')):
+	for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
+		move=''
+		# t=time.time()
+		img = frame.array
+		gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+		ret,th1 = cv2.threshold(gray.copy(),100,255,cv2.THRESH_BINARY)
+		_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
+		cnt=ut.getMaxContour(contours,4000)
+		if cnt!=None:
+			x,y,w,h = cv2.boundingRect(cnt)
+			imgT=img[y:y+h,x:x+w]
+			imgT=cv2.bitwise_and(imgT,imgT,mask=th1[y:y+h,x:x+w])
+			imgT=cv2.resize(imgT,(200,200))
+			cv2.imshow('Trainer',imgT)
+		cv2.imshow('Frame',img)
+		cv2.imshow('Thresh',th1)
+
+		k = 0xFF & cv2.waitKey(10)
+		if k == 27:
+			break
+		if k == ord('s') or start:
+			name=str(i)+"_"+str(j)+".jpg"
+			cv2.imwrite(train_folder+'/'+name,imgT)
+			start = True
+			if(j<40):
+				j+=1
+			else:
+				while(0xFF & cv2.waitKey(0)!=ord('n')):
+					j=1
 				j=1
-			j=1
-			i+=1
-		
+				i+=1
+		rawCapture.truncate(0)
 
-cap.release()        
-cv2.destroyAllWindows()
+	cap.release()        
+	cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main(sys.argv)
