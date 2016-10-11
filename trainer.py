@@ -52,7 +52,7 @@ def main(argv):
 			if(j<40):
 				j+=1
 			else:
-				while(0xFF & cv2.waitKey(0)!=ord('n')):
+				while(0xFF & cv2.waitKey(10)!=ord('n')):
 					print('next')
 					start = False
 					j=1
