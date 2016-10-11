@@ -32,7 +32,7 @@ import numpy as np
 #our libraries
 import util as ut
 import svm_train as st 
-import hand_util as hu
+# import hand_util as hu
 
 #other dependencies
 from pymouse import PyMouse
