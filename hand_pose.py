@@ -25,8 +25,8 @@ import time
 
 
 #create and train SVM model each time coz bug in opencv 3.1.0 svm.load() https://github.com/Itseez/opencv/issues/4969
-model=st.trainSVM(3,40,'SICTrainData')
-move_text={'1':'Rock','2':'Scissor','3':'Paper'}
+model=st.trainSVM(5,40,'SICTrainData')
+move_text={'1':'Rock','2':'Scissor','3':'Paper','4':'Scissor','5':'Paper'}
 
 #Camera and font initialization
 # cam=int(raw_input("Enter Camera Index : "))
