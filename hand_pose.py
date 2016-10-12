@@ -33,8 +33,8 @@ move_text={'1':'Rock','2':'Scissor','3':'Paper'}
 # cap=cv2.VideoCapture(cam)
 # font = cv2.FONT_HERSHEY_SIMPLEX
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(12, GPIO.OUT)
-GPIO.output(12, GPIO.HIGH)
+GPIO.setup(3, GPIO.OUT)
+GPIO.output(3, GPIO.HIGH)
 
 #The main event loop
 # initialize the camera and grab a reference to the raw camera capture
