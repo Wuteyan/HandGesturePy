@@ -45,8 +45,9 @@ def main(argv):
 		if k == 27:
 			break
 		if k == ord('s') or start:
-			print('write')
+			
 			name=str(i)+"_"+str(j)+".jpg"
+			print('write' + name)
 			cv2.imwrite(train_folder+'/'+name,imgT)
 			start = True
 			if(j<40):
