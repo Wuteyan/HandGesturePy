@@ -79,5 +79,5 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 
 cap.release()        
 cv2.destroyAllWindows()
-
+GPIO.output(3, GPIO.LOW)
 

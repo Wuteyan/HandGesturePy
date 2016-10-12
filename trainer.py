@@ -63,6 +63,7 @@ def main(argv):
 
 	cap.release()        
 	cv2.destroyAllWindows()
+	GPIO.output(3, GPIO.LOW)
 
 if __name__ == "__main__":
     main(sys.argv)
