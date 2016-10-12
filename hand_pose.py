@@ -58,7 +58,7 @@ for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=
 	img = frame.array
 	# _,img=cap.read()
 	gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-	ret,th1 = cv2.threshold(gray.copy(),80,255,cv2.THRESH_TOZERO)
+	ret,th1 = cv2.threshold(gray.copy(),60,255,cv2.THRESH_TOZERO)
 	cv2.imshow('thresh',th1)
 	_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
 	cnt=ut.getMaxContour(contours,4000)
