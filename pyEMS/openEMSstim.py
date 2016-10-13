@@ -8,7 +8,7 @@
 
 import serial
 from time import sleep
-from EMSCommand import ems_command
+from pyEMS.EMSCommand import ems_command
 version = '0.1'
 
 class openEMSstim():
