@@ -1,11 +1,21 @@
-import socket               
+import socket
+import sys
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+HOST, PORT = "10.0.1.21", 4001
+data = " ".join(sys.argv[1:])
 
-host = '10.0.1.21'# ip of raspberry pi 
-port = 4001               
-s.connect((host, port))
-while 1:
-    # print(s.recv(1024))
-    s.sendall("676987\n")
-s.close()
+# Create a socket (SOCK_STREAM means a TCP socket)
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+try:
+    # Connect to server and send data
+    sock.connect((HOST, PORT))
+    sock.sendall(data + "\n")
+
+    # Receive data from the server and shut down
+    received = sock.recv(1024)
+finally:
+    sock.close()
+
+print "Sent:     {}".format(data)
+print "Received: {}".format(received)
