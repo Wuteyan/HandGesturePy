@@ -48,7 +48,7 @@ if __name__ == '__main__':
                 elif cmd == '7':
                     ENS(2, intensity1, intensity2)
                 else:
-                    print "wrong cmd"
+                    print ("wrong cmd")
     finally:
         GPIO.output(3, GPIO.LOW)
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
 def EMS(number, intensity1, intensity2):
 
     if number == 3:
-        print "scissor",
+        print ("scissor",)
         print intensity2
         my_ems_board.send(ems_command(1,intensity2,1000))
     elif number ==2:
