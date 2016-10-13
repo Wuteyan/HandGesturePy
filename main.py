@@ -17,7 +17,7 @@ if __name__ == '__main__':
     GPIO.setup(3, GPIO.OUT)
     GPIO.output(3, GPIO.LOW)
     hand_pose = Hand_Pose()
-    cc = ClientSocket.ClientSocket('10.0.1.21', 4001)
+    cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
     cc.connect();
     try:
         while True:
@@ -57,6 +57,14 @@ if __name__ == '__main__':
                     intensity2 = int(params[1])
                     mode = int(params[2])
                     ENS(mode, intensity1, intensity2)
+"""                elif cmd == '4':
+                    intensity1 = int(cc.recvAll())%1000
+                elif cmd == '5':
+                    intensity2 = int(cc.recvAll())%1000
+                elif cmd == '6':
+                    ENS(3, intensity1, intensity2)
+                elif cmd == '7':
+                    ENS(2, intensity1, intensity2)"""
                 else:
                     print ("wrong cmd")
     finally:
