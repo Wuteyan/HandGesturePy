@@ -57,14 +57,6 @@ if __name__ == '__main__':
                     intensity2 = int(params[1])
                     mode = int(params[2])
                     ENS(mode, intensity1, intensity2)
-"""                elif cmd == '4':
-                    intensity1 = int(cc.recvAll())%1000
-                elif cmd == '5':
-                    intensity2 = int(cc.recvAll())%1000
-                elif cmd == '6':
-                    ENS(3, intensity1, intensity2)
-                elif cmd == '7':
-                    ENS(2, intensity1, intensity2)"""
                 else:
                     print ("wrong cmd")
     finally:
