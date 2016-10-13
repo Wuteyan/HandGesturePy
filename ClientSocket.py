@@ -79,7 +79,16 @@ class ClientSocket():
     
     def recvCmd(self):
         return self.recv(1)
-    
+
+    def recvParam(self):
+        result = self.recvBuf.split(' ')
+        for e in result:
+            if e == '':
+                result.remove(e)
+        self.recvLen = 0
+        self.recvBuf = ''
+        return result
+                
     def checkRecv(self):
         if self.recvLen == 0:
             return False
