@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import ClientSocket
 from random import randint 
 import time
+from pyEMS import openEMSstim
 
 my_ems_board = openEMSstim.openEMSstim("/dev/tty0.usbserial",19200)
 intensity1=0
