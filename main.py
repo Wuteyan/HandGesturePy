@@ -57,11 +57,11 @@ def EMS(number, intensity1, intensity2):
 
     if number == 3:
         print ("scissor",)
-        print intensity2
+        print (intensity2)
         my_ems_board.send(ems_command(1,intensity2,1000))
     elif number ==2:
-        print "rock",
-        print intensity1
+        print ("rock",)
+        print (intensity1)
         my_ems_board.send(ems_command(1,intensity1,1000))
         my_ems_board.send(ems_command(2,intensity1,1000))
     else:
