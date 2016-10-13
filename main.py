@@ -24,6 +24,9 @@ if __name__ == '__main__':
             if cc.checkRecv():
                 cmd = cc.recvCmd()
                 params = cc.recvParam()
+                print ("cmd = %s" % cmd)
+                print ("params = %s" % params)
+                
                 if cmd == '1':
                     intensity1 = int(params[0])
                     intensity2 = int(params[1])
