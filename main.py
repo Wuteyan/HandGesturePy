@@ -1,4 +1,4 @@
-import hand_pose
+from hand_pose import Hand_Pose
 import RPi.GPIO as GPIO
 import ClientSocket
 from random import randint 
