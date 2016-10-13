@@ -5,72 +5,93 @@ import sys
 
 class ClientSocket():
 
-    """def threaded_function(self):
-        #print ('recv_thread start')
+    def recvThreadFunc(self):
+        #print ('recvThreadFunc start')
         while True:
             if self.isConnected:
                 try:
                     data = self.sock.recv(1024)
-                    self.recv_buf.extend(data)
-                    self.recv_len += len(data)
+                    data = data.decode("utf-8")
+                    self.recvBuf += data
+                    self.recvLen += len(data)
                 except:
-                    #print ('except')
-                    break"""
+                    print ('close recvThreadFunc')
+                    break
 
-    def recv_thread_function(self, next_step):
+    def recvThreadCallback(self, nextStep):
         if self.isConnected:
             while True:
                 try:
                     data = self.sock.recv(1024)
                     data = data.decode("utf-8")
                     if len(data) != 0:
-                        self.recv_buf += data
-                        self.recv_len += len(data)
+                        self.recvBuf += data
+                        self.recvLen += len(data)
                         print ('block data = %s' % data)
                         print ('block data len = %d' % len(data))
-                        next_step(data)
+                        nextStep(data)
                         break
                     else:
                         #print ('recv none')
                         pass
                 except:
                     pass
-            print ('recv_thread_function while end')
+            print ('recvThreadCallback while end')
     
     def __init__(self, ip, port):
         self.ip = ip
         self.port = port
         self.stderr = 0
-        self.recv_len = 0
-        self.recv_buf = ''
+        self.recvLen = 0
+        self.recvBuf = ''
         self.isConnected = False
         self.socket = None
-        self.recv_thread = None
+        self.recvThread = None
 
     def connect(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_address = (self.ip, self.port)
-        self.sock.connect(server_address)
+        serverAddress = (self.ip, self.port)
+        self.sock.connect(serverAddress)
         self.isConnected = True
-        #self.recv_thread = Thread(target = self.threaded_function)
-        #self.recv_thread.start()
+        self.recvThread = Thread(target = self.recvThreadFunc)
+        self.recvThread.start()
 
-    def recv(self, callback):
-        self.recv_thread = Thread(target = self.recv_thread_function, args = (callback,))
-        self.recv_thread.start()
-        
-    """def check_recv(self):
-        if self.recv_len == 0:
+    """def recv(self, callback):
+        self.recvThread = Thread(target = self.recvThreadCallback, args = (callback,))
+        self.recvThread.start()"""
+
+    def recv(self, bufLen):
+        if (bufLen < self.recvLen):
+            result = self.recvBuf[0 : bufLen]
+            self.recvBuf = self.recvBuf[bufLen : self.recvLen]
+            self.recvLen -= bufLen
+        else:
+            result = self.recvBuf
+            self.recvLen = 0
+            self.recvBuf = ''
+        return result
+
+    def recvAll(self):
+        result = self.recvBuf
+        self.recvLen = 0
+        self.recvBuf = ''
+        return result
+    
+    def recvCmd(self):
+        return self.recv(1)
+    
+    def checkRecv(self):
+        if self.recvLen == 0:
             return False
         else:
-            return True"""
+            return True
 
     #should not use
-    def recv_block(self):
+    def recvBlock(self):
         while True:
             data = self.sock.recv(1024)
-            #self.recv_buf += data
-            #self.recv_len += len(data)
+            #self.recvBuf += data
+            #self.recvLen += len(data)
             if len(data) != 0:
                 print ('block data = %s' % data)
                 print ('block data len = %d' % len(data))
@@ -83,3 +104,5 @@ class ClientSocket():
         self.isConnected = False
         self.sock.close()
         
+if __name__ == '__main__':
+    print ('OK')
