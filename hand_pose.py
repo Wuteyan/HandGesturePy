@@ -26,7 +26,7 @@ class  Hand_Pose():
 	"""docstring for  Hand_Pose"""
 	def __init__(self):
 		super( Hand_Pose, self).__init__()
-		self.model=st.trainSVM(5,40,'SICTrainData')
+		self.model=st.trainSVM(3,40,'SICTrainData')
 		self.move_text={'1':'Rock','2':'Scissor','3':'Paper','4':'Scissor','5':'Paper'}
 		
 		self.buffer = []
