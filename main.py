@@ -36,7 +36,8 @@ if __name__ == '__main__':
     hand_pose = Hand_Pose()
     cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
     cc.connect();
-    recvThread = Thread(target = cameraThreadFunc, args = (hand_pose,))
+    handPose.startCamera()
+    #recvThread = Thread(target = cameraThreadFunc, args = (hand_pose,))
 
     try:
         while True:
@@ -53,7 +54,7 @@ if __name__ == '__main__':
                 elif cmd == '2':
                     if mode == 1:
                         rand_number = randint(1, 3)
-                        EMS(random_number, intensity1, intensity2)
+                        EMS(rand_number, intensity1, intensity2)
                         time.sleep(0.5)
                         result = hand_pose.posPredict()
                         result = 1
