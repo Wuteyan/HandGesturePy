@@ -17,6 +17,16 @@ mode = 1
     GPIO.output(3, GPIO.HIGH)
     handPose.startCamera()"""
 
+def printNum2Str(preStr, number):
+    if number == 1:
+        print (preStr + 'rock')
+    elif number == 2:
+        print (preStr + 'scissor')
+    elif number == 3:
+        print (preStr + 'paper')
+    else:
+        pass
+
 def socketThreadFunc(hand_pose):
     cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
     cc.connect()
@@ -36,10 +46,11 @@ def socketThreadFunc(hand_pose):
                 elif cmd == '2':
                     if mode == 1:
                         rand_number = randint(1, 3)
+                        printNum2Str('EMS: ', rand_number)
                         EMS(rand_number, intensity1, intensity2)
                         time.sleep(0.5)
                         result = hand_pose.posPredict()
-                        result = 1
+                        printNum2Str('predict: ', result)
                         if (rand_number == result):
                             cc.send('3')
                         elif ((rand_number - result == 1) or (rand_number - result == -2)):
@@ -48,9 +59,11 @@ def socketThreadFunc(hand_pose):
                             cc.send('2')
                     else:
                         predictResult = hand_pose.posPredict()
+                        printNum2Str('predict 1: ', predictResult)
                         EMS(predictResult, intensity1, intensity2)
                         time.sleep(0.5)
                         realResult = hand_pose.posPredict()
+                        printNum2Str('predict 2: ', realResult)
                         if (predictResult == realResult):
                             cc.send('3')
                         elif ((predictResult - realResult == 1) or (predictResult - realResult == -2)):
