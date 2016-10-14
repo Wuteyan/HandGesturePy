@@ -101,7 +101,7 @@ if __name__ == '__main__':
     GPIO.output(3, GPIO.HIGH)
     
     hand_pose = Hand_Pose()
-    #socketThread = Thread(target = socketThreadFunc, args = (hand_pose,))
-    #socketThread.start()
+    socketThread = Thread(target = socketThreadFunc, args = (hand_pose,))
+    socketThread.start()
     hand_pose.startCamera()
     
