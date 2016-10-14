@@ -14,6 +14,7 @@ mode = 1
 
 def cameraThreadFunc(handPose):
     print ('start camera')
+    GPIO.output(3, GPIO.HIGH)
     handPose.startCamera()
 
 def EMS(number, intensity1, intensity2):
