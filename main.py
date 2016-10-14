@@ -12,36 +12,15 @@ intensity1 = 0
 intensity2 = 0
 mode = 1
 
-def cameraThreadFunc(handPose):
+"""def cameraThreadFunc(handPose):
     print ('start camera')
     GPIO.output(3, GPIO.HIGH)
-    handPose.startCamera()
+    handPose.startCamera()"""
 
-def EMS(number, intensity1, intensity2):
-    if number == 2:
-        print ("scissor",)
-        print (intensity2)
-        my_ems_board.send(ems_command(1,intensity2,1000))
-    elif number == 1:
-        print ("rock",)
-        print (intensity1)
-        my_ems_board.send(ems_command(1,intensity1,1000))
-        my_ems_board.send(ems_command(2,intensity1,1000))
-    else:
-        pass 
-
-if __name__ == '__main__':
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(3, GPIO.OUT)
-    GPIO.output(3, GPIO.LOW)
-    hand_pose = Hand_Pose()
+def socketThreadFunc(hand_pose):
     cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
-    #cc.connect();
-    GPIO.output(3, GPIO.HIGH)
-    hand_pose.startCamera()
-    #recvThread = Thread(target = cameraThreadFunc, args = (hand_pose,))
-    #recvThread.start()
-    
+    cc.connect()
+
     try:
         while True:
             if cc.checkRecv():
@@ -87,3 +66,29 @@ if __name__ == '__main__':
                     print ("wrong cmd")
     finally:
         GPIO.output(3, GPIO.LOW)
+
+    
+def EMS(number, intensity1, intensity2):
+    if number == 2:
+        print ("scissor",)
+        print (intensity2)
+        my_ems_board.send(ems_command(1,intensity2,1000))
+    elif number == 1:
+        print ("rock",)
+        print (intensity1)
+        my_ems_board.send(ems_command(1,intensity1,1000))
+        my_ems_board.send(ems_command(2,intensity1,1000))
+    else:
+        pass 
+
+if __name__ == '__main__':
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(3, GPIO.OUT)
+    #GPIO.output(3, GPIO.LOW)
+    GPIO.output(3, GPIO.HIGH)
+    
+    hand_pose = Hand_Pose()
+    socketThread = Thread(target = socketThreadFunc, args = (hand_pose,))
+    socketThread.start()
+    hand_pose.startCamera()
+    
