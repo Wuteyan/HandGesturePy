@@ -13,8 +13,22 @@ intensity2 = 0
 mode = 1
 
 def cameraThreadFunc(handPose):
+    print ('start camera')
     handPose.startCamera()
-    
+
+def EMS(number, intensity1, intensity2):
+    if number == 2:
+        print ("scissor",)
+        print (intensity2)
+        my_ems_board.send(ems_command(1,intensity2,1000))
+    elif number == 1:
+        print ("rock",)
+        print (intensity1)
+        my_ems_board.send(ems_command(1,intensity1,1000))
+        my_ems_board.send(ems_command(2,intensity1,1000))
+    else:
+        pass 
+
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(3, GPIO.OUT)
@@ -69,18 +83,3 @@ if __name__ == '__main__':
                     print ("wrong cmd")
     finally:
         GPIO.output(3, GPIO.LOW)
-
-
-def EMS(number, intensity1, intensity2):
-
-    if number == 2:
-        print ("scissor",)
-        print (intensity2)
-        my_ems_board.send(ems_command(1,intensity2,1000))
-    elif number == 1:
-        print ("rock",)
-        print (intensity1)
-        my_ems_board.send(ems_command(1,intensity1,1000))
-        my_ems_board.send(ems_command(2,intensity1,1000))
-    else:
-        pass 
