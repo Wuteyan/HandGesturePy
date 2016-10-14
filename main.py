@@ -31,13 +31,14 @@ if __name__ == '__main__':
                     intensity1 = int(params[0])
                     intensity2 = int(params[1])
                     mode = int(params[2])
-                    hand_pose.startCamera()
+                    #hand_pose.startCamera()
                 elif cmd == '2':
                     if mode == 1:
                         rand_number = randint(1, 3)
                         ENS(random_number, intensity1, intensity2)
                         time.sleep(0.5)
-                        result = hand_pose.posPredict()
+                        #result = hand_pose.posPredict()
+                        result = 1
                         if (rand_number == result):
                             cc.send('3')
                         elif ((rand_number - result == 1) or (rand_number - result == -2)):
