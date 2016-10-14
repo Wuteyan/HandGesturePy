@@ -50,7 +50,7 @@ class  Hand_Pose():
 	# cap=cv2.VideoCapture(cam)
 	# font = cv2.FONT_HERSHEY_SIMPLEX
 
-		for frame in camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
+		for frame in self.camera.capture_continuous(rawCapture, format="rgb", use_video_port=True):
 			move=''
 			t=time.time()
 			img = frame.array
