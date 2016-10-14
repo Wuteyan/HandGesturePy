@@ -77,6 +77,7 @@ def socketThreadFunc(hand_pose):
                     ENS(mode, intensity1, intensity2)
                 else:
                     print ("wrong cmd")
+            time.sleep(0.01)
     finally:
         GPIO.output(3, GPIO.LOW)
 
