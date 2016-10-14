@@ -5,13 +5,16 @@ from random import randint
 import time
 from pyEMS.EMSCommand import ems_command
 from pyEMS import openEMSstim
-
+from threading import Thread
 
 my_ems_board = openEMSstim.openEMSstim("/dev/tty0.usbserial",19200)
 intensity1 = 0
 intensity2 = 0
 mode = 1
 
+def cameraThreadFunc(handPose):
+    handPose.startCamera()
+    
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(3, GPIO.OUT)
@@ -19,6 +22,8 @@ if __name__ == '__main__':
     hand_pose = Hand_Pose()
     cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
     cc.connect();
+    recvThread = Thread(target = cameraThreadFunc, args = (hand_pose,))
+
     try:
         while True:
             if cc.checkRecv():
@@ -31,13 +36,12 @@ if __name__ == '__main__':
                     intensity1 = int(params[0])
                     intensity2 = int(params[1])
                     mode = int(params[2])
-                    #hand_pose.startCamera()
                 elif cmd == '2':
                     if mode == 1:
                         rand_number = randint(1, 3)
-                        ENS(random_number, intensity1, intensity2)
+                        EMS(random_number, intensity1, intensity2)
                         time.sleep(0.5)
-                        #result = hand_pose.posPredict()
+                        result = hand_pose.posPredict()
                         result = 1
                         if (rand_number == result):
                             cc.send('3')
@@ -47,7 +51,7 @@ if __name__ == '__main__':
                             cc.send('2')
                     else:
                         predictResult = hand_pose.posPredict()
-                        ENS(predictResult, intensity1, intensity2)
+                        EMS(predictResult, intensity1, intensity2)
                         time.sleep(0.5)
                         realResult = hand_pose.posPredict()
                         if (predictResult == realResult):
