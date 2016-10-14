@@ -17,6 +17,7 @@ class ClientSocket():
                 except:
                     print ('close recvThreadFunc')
                     break
+            sleep(0.01)
 
     def recvThreadCallback(self, nextStep):
         if self.isConnected:
@@ -53,8 +54,8 @@ class ClientSocket():
         serverAddress = (self.ip, self.port)
         self.sock.connect(serverAddress)
         self.isConnected = True
-        #self.recvThread = Thread(target = self.recvThreadFunc)
-        #self.recvThread.start()
+        self.recvThread = Thread(target = self.recvThreadFunc)
+        self.recvThread.start()
 
     """def recv(self, callback):
         self.recvThread = Thread(target = self.recvThreadCallback, args = (callback,))
