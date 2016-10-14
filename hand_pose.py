@@ -61,7 +61,7 @@ class  Hand_Pose():
 			_,contours,hierarchy = cv2.findContours(th1.copy(),cv2.RETR_EXTERNAL, 2)
 			cnt=ut.getMaxContour(contours,4000)
 			if cnt!=None:
-				gesture,res=ut.getGestureImg(cnt,img,th1,model)
+				gesture,res=ut.getGestureImg(cnt,img,th1,self.model)
 				self.resBuf.append(res)
 				print(res)
 				cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
