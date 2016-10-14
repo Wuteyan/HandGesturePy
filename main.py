@@ -36,7 +36,7 @@ if __name__ == '__main__':
     hand_pose = Hand_Pose()
     cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
     cc.connect();
-    handPose.startCamera()
+    hand_pose.startCamera()
     #recvThread = Thread(target = cameraThreadFunc, args = (hand_pose,))
 
     try:
