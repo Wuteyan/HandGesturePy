@@ -86,15 +86,20 @@ class  Hand_Pose():
 		# check resBuf and get the most possible gesture
 		posRock = 0
 		posScissors = 0
-		posPapper = 0 
-		for pose in self.resBuf :
-			if pose == 1:
+		posPapper = 0
+		# SCOTT PRINT TEST
+		print (self.resBuf)
+		for i in range(len(self.resBuf)):
+			if self.resBuf[i] == "1":
 				posRock = posRock + 1
-			elif pose == 2:
+			elif self.resBuf[i] == "2":
 				posScissors = posScissors + 1
-			elif pose == 3:
+			elif self.resBuf[i] == "3":
 				posPapper = posPapper + 1
 		posFinal = max(posPapper, posScissors, posRock)
+		print (str(posRock))
+		print (str(posScissors))
+		print (str(posPapper))
 		# clear resBuf
 		self.resBuf[:] = []
 		if posFinal == posRock:
