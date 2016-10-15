@@ -62,7 +62,10 @@ class  Hand_Pose():
 			cnt=ut.getMaxContour(contours,4000)
 			if cnt!=None:
 				gesture,res=ut.getGestureImg(cnt,img,th1,self.model)
-				self.resBuf.append(res)
+				if len(self.resBuf) > 10:	
+					self.resBuf.pop(0) 
+					self.resBuf.append(res)
+				else : self.resBuf.append(res)
 				print(res)
 				cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
 				# move='         '+move_text[res]
