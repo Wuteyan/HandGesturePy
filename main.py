@@ -74,7 +74,7 @@ def socketThreadFunc(hand_pose):
                     intensity1 = int(params[0])
                     intensity2 = int(params[1])
                     mode = int(params[2])
-                    ENS(mode, intensity1, intensity2)
+                    EMS(mode, intensity1, intensity2)
                 else:
                     print ("wrong cmd")
             time.sleep(0.01)
@@ -91,6 +91,7 @@ def EMS(number, intensity1, intensity2):
         print ("rock",)
         print (intensity1)
         my_ems_board.send(ems_command(1,intensity1,1000))
+        time.sleep(0.01)
         my_ems_board.send(ems_command(2,intensity1,1000))
     else:
         pass 
