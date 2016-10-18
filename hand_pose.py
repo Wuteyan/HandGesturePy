@@ -80,7 +80,7 @@ class  Hand_Pose():
 		
 
 		cap.release()        
-		cv2.destroyAllWindows()
+		# cv2.destroyAllWindows()
 
 	def posPredict(self):
 		# check resBuf and get the most possible gesture

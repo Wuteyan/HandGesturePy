@@ -28,7 +28,7 @@ def printNum2Str(preStr, number):
         pass
 
 def socketThreadFunc(hand_pose):
-    cc = ClientSocket.ClientSocket('10.0.1.33', 4001)
+    cc = ClientSocket.ClientSocket('172.20.10.3', 4001)
     cc.connect()
 
     try:
