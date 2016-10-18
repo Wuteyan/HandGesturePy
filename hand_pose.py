@@ -66,7 +66,7 @@ class  Hand_Pose():
 					self.resBuf.pop(0) 
 					self.resBuf.append(res)
 				else : self.resBuf.append(res)
-				print(res)
+				# print(res)
 				# cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
 				# move='         '+move_text[res]
 				
@@ -88,7 +88,7 @@ class  Hand_Pose():
 		posScissors = 0
 		posPapper = 0
 		# SCOTT PRINT TEST
-		print (self.resBuf)
+		# print (self.resBuf)
 		for i in range(len(self.resBuf)):
 			if self.resBuf[i] == "1":
 				posRock = posRock + 1
@@ -97,9 +97,9 @@ class  Hand_Pose():
 			elif self.resBuf[i] == "3":
 				posPapper = posPapper + 1
 		posFinal = max(posPapper, posScissors, posRock)
-		print (str(posRock))
-		print (str(posScissors))
-		print (str(posPapper))
+		# print (str(posRock))
+		# print (str(posScissors))
+		# print (str(posPapper))
 		# clear resBuf
 		self.resBuf[:] = []
 		if posFinal == posRock:

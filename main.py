@@ -7,7 +7,7 @@ from pyEMS.EMSCommand import ems_command
 from pyEMS import openEMSstim
 from threading import Thread
 
-my_ems_board = openEMSstim.openEMSstim("/dev/tty0.usbserial",19200)
+my_ems_board = openEMSstim.openEMSstim("/dev/ttyUSB0",19200)
 intensity1 = 0
 intensity2 = 0
 mode = 1
@@ -60,13 +60,17 @@ def socketThreadFunc(hand_pose):
                     else:
                         predictResult = hand_pose.posPredict()
                         printNum2Str('predict 1: ', predictResult)
-                        EMS(predictResult, intensity1, intensity2)
+                        winPose = predictResult - 1
+                        if winPose == 0:
+                            winPose = 3
+                        EMS(winPose, intensity1, intensity2)
+                        printNum2Str('winPose:', winPose)
                         time.sleep(0.5)
                         realResult = hand_pose.posPredict()
                         printNum2Str('predict 2: ', realResult)
-                        if (predictResult == realResult):
+                        if (winPose == realResult):
                             cc.send('3')
-                        elif ((predictResult - realResult == 1) or (predictResult - realResult == -2)):
+                        elif ((winPose - realResult == 1) or (winPose - realResult == -2)):
                             cc.send('1')
                         else:
                             cc.send('2')                    
@@ -84,12 +88,12 @@ def socketThreadFunc(hand_pose):
     
 def EMS(number, intensity1, intensity2):
     if number == 2:
-        print ("scissor",)
-        print (intensity2)
+        # print ("scissor",)
+        # print (intensity2)
         my_ems_board.send(ems_command(1,intensity2,1000))
     elif number == 1:
-        print ("rock",)
-        print (intensity1)
+        # print ("rock",)
+        # print (intensity1)
         my_ems_board.send(ems_command(1,intensity1,1000))
         time.sleep(0.01)
         my_ems_board.send(ems_command(2,intensity1,1000))
