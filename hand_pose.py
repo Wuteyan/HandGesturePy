@@ -67,12 +67,12 @@ class  Hand_Pose():
 					self.resBuf.append(res)
 				else : self.resBuf.append(res)
 				print(res)
-				cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
+				# cv2.imshow('PredictedGesture',cv2.imread('SICTrainData/'+res+'_21.jpg'))
 				# move='         '+move_text[res]
 				
 			fps=int(1/(time.time()-t))
 			# cv2.putText(img,"FPS: "+str(fps)+move,(50,50),1,(255,255,255),2,cv2.LINE_AA)
-			cv2.imshow('Frame',img)
+			# cv2.imshow('Frame',img)
 			rawCapture.truncate(0)
 			k = 0xFF & cv2.waitKey(10)
 			if k == 27:
