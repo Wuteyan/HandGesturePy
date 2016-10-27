@@ -1,9 +1,9 @@
 # HandGesturePy
-Clone From zed41/HandGesturePy
+Clone From zed41/HandGesturePy 
 Human Computer Interaction using hand gesutures using Opencv - Python .
 Hand Gesture recognition is performed using HoG features and SVM as classifier.
-Run on the Raspberry pi 3 with opencv3 and python3
-This project is inspired from http://research.microsoft.com/pubs/220845/depth4free_SIGGRAPH.pdf
+Run on the Raspberry pi 3 and Camerawith opencv3 and python3
+This project is for UIST's student innovation competition and inspired from http://research.microsoft.com/pubs/220845/depth4free_SIGGRAPH.pdf.
 
 ##Hardware Setup
 <!-- ![alt tag](https://github.com/zed41/HandGesturePy/blob/master/ScrenShots/hardware_setup.png) -->
@@ -12,7 +12,8 @@ This project is inspired from http://research.microsoft.com/pubs/220845/depth4fr
 ![](https://github.com/zed41/HandGesturePy/blob/master/ScrenShots/cam_different.png)
 
 ##Final Setup
-![](https://github.com/zed41/HandGesturePy/blob/master/ScrenShots/final_setup.jpg)
+![](https://github.com/Wuteyan/HandGesturePy/blob/master/ScrenShots/SICFinalProduct.JPG)
+![](https://github.com/Wuteyan/HandGesturePy/blob/master/ScrenShots/SICFinalProduct(B).JPG)
 
 ##Project Modules
 ![](https://github.com/zed41/HandGesturePy/blob/master/ScrenShots/project_modules.png)
